@@ -4,7 +4,7 @@ from rest_framework.pagination import (
     PageNumberPagination,
 )
 
-
+# return data with pagination
 class PostLimitOffsetPagination(PageNumberPagination, LimitOffsetPagination):
 
     def get_paginated_response(self, data):

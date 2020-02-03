@@ -10,6 +10,8 @@ from rest_framework.permissions import (
  IsAuthenticatedOrReadOnly
 )
 from ...core.pagination import PostLimitOffsetPagination
+from ...core.common import IsAdminUser, IsUser
+
 from .serializers import TABLE, BookSerializer, BookCreateSerializer
 from app_dir.author.models import Author 
 from app_dir.book.models import Book
@@ -23,6 +25,7 @@ from django.views import View
 from rest_pandas import PandasView, PandasScatterSerializer
 
 # Filter Book by author
+# any authenticated user can access
 class BookListByAuthorAPIView(ListAPIView):
     serializer_class = BookSerializer
     pagination_class = PostLimitOffsetPagination
@@ -55,7 +58,7 @@ class BookListAPIView(ListAPIView):
 
 class BookCreateAPIView(CreateAPIView):
     serializer_class = BookCreateSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUser]
     queryset = TABLE.objects.all()
 
 
@@ -66,16 +69,18 @@ class BookDetailAPIView(RetrieveAPIView):
 
 class BookDeleteAPIView(DestroyAPIView):
     queryset = TABLE.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUser]
     serializer_class = BookSerializer
 
 
 class BookUpdateAPIView(RetrieveUpdateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUser]
     queryset = TABLE.objects.all()
     serializer_class = BookSerializer
 
 # Export all books as excel
+# Only Library admin can access
 class ExcelExportView(PandasView):
+    permission_classes = [IsAdminUser]
     queryset = Book.objects.all()
     serializer_class = BookSerializer

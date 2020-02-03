@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (
     UserListAPIView, UserCreateAPIView,
     UserDetailAPIView, UserDeleteAPIView,
-    UpdateAPIView
+    UpdateAPIView, ProfileView
 )
 
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/<int:pk>/', UserDetailAPIView.as_view(), name='user-profile'),
     path('delete/<int:pk>/', UserDeleteAPIView.as_view(), name='user-destroyer'),
     path('update/<int:pk>/', UpdateAPIView.as_view(), name='user-updater'),
+    path('profile/<int:pk>/upload/', ProfileView.as_view(), name="file_upload")
 ]

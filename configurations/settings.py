@@ -39,11 +39,15 @@ DEFAULT_APPS = (
     'django.contrib.staticfiles',
 )
 
+EXTERNAL_APPS = (
+    'rest_framework',
+)
+
 LOCAL_APPS = (
     'app_dir.user',
 )
 
-INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
+INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,3 +132,16 @@ STATIC_URL = '/static/'
 # path to folder where uploaded files will be
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+

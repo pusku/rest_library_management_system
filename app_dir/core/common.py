@@ -29,3 +29,12 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
         # Write permissions are only allowed to the owner of the snippet.
         return obj.id == request.user.id
+
+REQUEST_CHOICES = (
+        ('A', 'Accepted'),
+        ('R', 'Rejected'),
+)
+STATUS_CHOICES = (
+    ('T', 'Taken'),
+    ('R', 'Returned'),
+)

@@ -47,6 +47,7 @@ LOCAL_APPS = (
     'app_dir.user',
     'app_dir.author',
     'app_dir.book',
+    'app_dir.loan',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS

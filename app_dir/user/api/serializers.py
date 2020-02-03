@@ -4,6 +4,7 @@ from app_dir.user.models import UserProfile
 
 User = get_user_model()
 
+# For Uploading Image
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
@@ -46,6 +47,8 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+# registration Serializer Declared separtely 
+# as it will not have is_staff field
 class MemberRegistrationSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(read_only=True)
 

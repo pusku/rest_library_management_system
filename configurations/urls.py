@@ -10,7 +10,9 @@ urlpatterns = [
     path('api-token-auth', obtain_jwt_token),
     path('user/', include(('app_dir.user.urls', 'user'), namespace='user')),
     path('api/user/', include(('app_dir.user.api.urls', 'user_api'), namespace='user_api')),
-    path('api/author/', include(('app_dir.author.api.urls', 'author_api'), namespace='author_api'))
+    path('api/author/', include(('app_dir.author.api.urls', 'author_api'), namespace='author_api')),
+    path('api/book/', include(('app_dir.book.api.urls', 'book_api'), namespace='book_api'))
+        # path('api/loan/', include(('app_dir.loan.api.urls', 'loan_api'), namespace='loan_api')),
 ]
 
 if settings.DEBUG:

@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
-from .serializers import UserSerializer, User, ProfileSerializer, UserProfile
+from .serializers import UserSerializer, User, ProfileSerializer, UserProfile, MemberRegistrationSerializer
 from ...core.pagination import PostLimitOffsetPagination
 from rest_framework import permissions
 from rest_framework.decorators import action
@@ -69,3 +69,16 @@ class ProfileView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ProfileSerializer
     queryset = UserProfile.objects.all()
+
+class MemberRegistrationAPIView(CreateAPIView):
+    serializer_class = MemberRegistrationSerializer
+    permission_classes = []
+    queryset = User.objects.all()
+
+class MemberProfileUpdateAPIView(RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = User.objects.all()
+    serializer_class = MemberRegistrationSerializer
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)

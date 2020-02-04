@@ -28,7 +28,7 @@ class LoanRequestStatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TABLE
-        fields = ('request')
+        fields = ['request']
 
     def update(self, instance, validated_data):
         instance.request = validated_data.get('request', instance.request)
@@ -41,7 +41,7 @@ class LoanStatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TABLE
-        fields = ('status')
+        fields = ['status']
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get('status', instance.status)

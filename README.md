@@ -65,7 +65,10 @@ If you wish to run your own build, you two options
     `$ cd django-rest-framework-boilerplate`    
     `$ docker-compose up`
     
-     `$--ignore-installed switch`
+    Execute below command to create a (super user) library admin
+    `docker exec -it <container id> python manage.py createsuperuser`
+
+
  2. Without docker
  
 First ensure you have python globally installed in your computer. If not, you can get python [here](python.org).
